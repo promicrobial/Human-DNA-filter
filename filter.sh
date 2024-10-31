@@ -55,10 +55,6 @@ process_files() {
     base_name=$(strip_extensions "$r1_file")
   fi
 
-  echo "Running FASTP..."
-  bash "${file_map['FASTP']}" "$r1_file" "$r2_file" "$config_fn"
-  local in_file="${OUT}/fastp/$(basename "$base_name").FASTP.fastq"
-
   for key in "${METHODS[@]}"; do
     local script="${file_map[$key]}"
     if [[ -f "$script" ]]; then
