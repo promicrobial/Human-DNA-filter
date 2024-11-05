@@ -162,6 +162,7 @@ cd $home
 ## || = OR
 ## -z check if find command output is empty
 
+: <<'COMMENT'
 if [ ! -d "$MINIMAP2_HPRC_INDEX_PATH" ] || [ -z "$(ls -A '$MINIMAP2_HPRC_INDEX_PATH'/*.mmi 2>/dev/null)" ]; then
     echo "Index directory $MINIMAP2_HPRC_INDEX_PATH does not exist, is not a directory, or does not contain any index files (.mmi). Building minimap2 index [$(date)]" then
 
@@ -172,9 +173,10 @@ if [ ! -d "$MINIMAP2_HPRC_INDEX_PATH" ] || [ -z "$(ls -A '$MINIMAP2_HPRC_INDEX_P
 else
   echo "Pre-exisiting index found in $MINIMAP2_HPRC_INDEX_PATH. Using: $(ls $MINIMAP2_HPRC_INDEX_PATH)"
 fi
+COMMENT
 
-docker1 run -v "$dir"/:"$dir" --rm --entrypoint /bin/bash biohpc_nc564/human-check -c "source activate $CONDA_ENV_NAME && bash '$home'/filter.sh $CONFIG"
+docker1 run -v "$dir"/:"$dir" --rm --env "home=$home" --entrypoint /bin/bash biohpc_nc564/human-check -c "source activate $CONDA_ENV_NAME && bash '$home'/filter.sh $CONFIG"
 
 rm "$temp_file"
 
-echo "Pipeline complete
+echo "Pipeline complete"

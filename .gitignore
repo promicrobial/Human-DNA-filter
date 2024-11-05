@@ -12,7 +12,10 @@ Thumbs.db
 *.fastq
 *.fastq.gz
 *.fq
+*.fna
 *.fq.gz
+*.fa
+*.mmi
 
 # Temporary files #
 ###################
@@ -21,6 +24,8 @@ Thumbs.db
 *.swp
 *.swo
 *~
+*tmp/*
+*.txt
 
 # Configuration files #
 ########################
@@ -45,3 +50,4 @@ config.caitlin.sh
 ######################
 data/host-filtered/
 logs/
+*.tar

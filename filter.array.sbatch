@@ -1,23 +1,15 @@
 #!/bin/bash -l
 # author: Lucas Patel (lpatel@ucsd.edu)
 # date: 12/22/23 
-# description: Script to run fastp on arbitrary inputs as part of a full host filtration pipeline. The adapters used are based on manual curation.
+# modified: Nathaniel Cole 10/31/24
+# description: Preparation of parallel process when input is more than one file
 
-#SBATCH -J host_filter
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=lpatel@ucsd.edu
-#SBATCH --time=24:00:00
-#SBATCH --partition=short
-#SBATCH --ntasks=16
-#SBATCH --nodes=1
-#SBATCH --mem=100gb
-#SBATCH --output=logs/%x-%A_%a.out
-#SBATCH --error=logs/%x-%A_%a.err
-
-### !!!#SBATCH --exclusive
+set -e
+set -o pipefail
 
 source ${config_fn}
-echo "Beginning host filtration (job array mode) on directory: ${IN}"
+echo "Beginning host filtration (parallel mode) on directory: ${IN}
+$(date)"
 
 strip_extensions() {
   local file_name="$1"
@@ -44,10 +36,6 @@ process_files() {
     base_name=$(strip_extensions "$r1_file")
   fi
 
-  echo "Running FASTP..."
-  bash "${file_map['FASTP']}" "$r1_file" "$r2_file" "$config_fn"
-  local in_file="${OUT}/fastp/$(basename "$base_name").FASTP.fastq"
-
   for key in "${METHODS[@]}"; do
     local script="${file_map[$key]}"
     if [[ -f "$script" ]]; then
@@ -73,17 +61,20 @@ process_files() {
   fi
 }
 
-line_num=$SLURM_ARRAY_TASK_ID
-read -r file <<< $(sed -n "${line_num}p" "$TMPDIR/all_files.txt")
+files=()
+while IFS= read -r file; do
+        files+=("$file")
+done < "$TMPDIR/all_files.txt"
+
 mate=
 if [[ "$file" == *"_R1"* ]]; then
   mate="${file/_R1/_R2}"
 fi
 
-current_time=$(date +"%T")  # %T format specifier for HH:MM:SS
+current_time=$(date +"%T")  # %T format specifier for HH:MM:SS  
 echo "Time start: $current_time"
 
-process_files "$file" "$mate"
+parallel -j "$threads" --delay 1 --line-buffer process_files ::>
 
 current_time=$(date +"%T")  # %T format specifier for HH:MM:SS
 echo "Time end: $current_time"
