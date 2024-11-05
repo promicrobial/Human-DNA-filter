@@ -3,7 +3,7 @@
 # date: 1/23/2024
 # description: Script to run HG38 alignment on single interleaved FASTQ file.
 
-set -e 
+set -e
 set -o pipefail
 
 config_fn=$2
