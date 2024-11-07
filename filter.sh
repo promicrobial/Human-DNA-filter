@@ -1,21 +1,14 @@
-#!/bin/bash -l
-# author: Lucas Patel (lpatel@ucsd.edu)
-# date: 12/22/23 
-# modified: Nathaniel Cole 10/31/24
-# description: Script to run host DNA detection pipeline on pre-processed FASTQ files.
-
-set -x #used for debugging
-#set -e
-#set -o pipefail
-
 config_fn="$1"
-source ${config_fn}
+if ! source "${config_fn}"; then
+  echo "Error: Unable to source configuration file: ${config_fn}"
+  exit 1
+fi
 echo "Beginning host filtration on directory: ${IN}"
 
 # make new temp directory
-export TMPDIR="${TMP}/$(basename $(mktemp -d))"
-mkdir -p ${TMPDIR}
-echo $TMPDIR
+export TMPDIR="${TMP}/$(basename "$(mktemp -d)")"
+mkdir -p "${TMPDIR}"
+echo "${TMPDIR}"
 
 # find all candidate fastq files for filtration
 find "$IN" -maxdepth 1 -type f \( -name '*_R1*.fastq' -o -name '*_R1*.fastq.gz' \) -exec sh -c 'for f; do echo "$f"; done >> "$TMPDIR/r1_files.txt"' sh {} +
@@ -54,8 +47,7 @@ process_files() {
     base_name=$(strip_extensions "$r1_file")
   fi
 
-# determines and runs the selected pipeline outlines in config.sh
-
+  # determines and runs the selected pipeline outlines in config.sh
   for key in "${METHODS[@]}"; do
     local script="${file_map[$key]}"
     if [[ -f "$script" ]]; then
@@ -66,19 +58,21 @@ process_files() {
       continue
     fi
 
-    if [ "$SAVE_INTERMEDIATE" -eq 0 ]; then
-      mkdir -p "${OUT}/${key,,}"
-      mv "${TMPDIR}/$(basename "$base_name").${key}.fastq" "${OUT}/${key,,}/$(basename "$base_name").${key}.fastq"
-      in_file="${OUT}/${key,,}/$(basename "$base_name").${key}.fastq"
-    else
-      in_file="${TMPDIR}/$(basename "$base_name").${key}.fastq"
-    fi
+    #if [ "$SAVE_INTERMEDIATE" -eq 0 ]; then
+    #  mkdir -p "${OUT}/${key,,}"
+    #  mv "${TMPDIR}/$(basename "$base_name").${key}.*" "${OUT}/${key,,}/$(basename "$base_name").$#{key}.*"
+    #  in_file="${OUT}/${key,,}/$(basename "$base_name").${key}.*"
+    #else
+    #  in_file="${TMPDIR}/$(basename "$base_name").${key}.*"
+    #fi
   done
 
-  if [[ -n "$r2_file" ]]; then
-    echo "Splitting into R1/R2..."
-    bash $home/split_fastq.sh "$in_file" "$config_fn"
-  fi
+  # If there is no paired R2 file, script is run to split the interleaved fastq file
+
+  #if [[ -n "$r2_file" ]]; then
+  #  echo "Splitting into R1/R2..."
+  #  bash "$home/split_fastq.sh" "$in_file" "$config_fn"
+  #fi
 }
 
 # process PE
@@ -92,5 +86,5 @@ while IFS= read -r file; do
 done < "$TMPDIR/other_files.txt"
 
 echo "Cleaning up $TMPDIR"
-ls $TMPDIR
-#rm -r $TMPDIR
+ls "$TMPDIR"
+#rm -r "$TMPDIR"

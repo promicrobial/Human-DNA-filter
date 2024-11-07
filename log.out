@@ -1,0 +1,97 @@
+Home directory set to /local/workdir/nc564/human_host_check/human_host_filtration
+Checking requirements
+# Directory: /local/workdir/nc564
+Checking for config file
+# Config file: /local/workdir/nc564/human_host_check/human_host_filtration/config.sh
+Setting user defined variables
+Beginning host filtration on directory: /local/workdir/nc564/human_host_check/human_host_filtration/data
+/local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ
+fastq files found!
+Found 1 R1 FASTQ files
+Found 1 R2 FASTQ files
+Found 0 other files
+Processing filenames...
+Running ALIGN-HPRC filtration...
++ export 'PS4=Line $LINENO: '
++ PS4='Line $LINENO: '
+Line 12: config_fn=/local/workdir/nc564/human_host_check/human_host_filtration/config.sh
+Line 13: source /local/workdir/nc564/human_host_check/human_host_filtration/config.sh
+LLine 4: IN=/local/workdir/nc564/human_host_check/human_host_filtration/data
+LLine 5: OUT=/local/workdir/nc564/human_host_check/human_host_filtration/data/host-filtered
+LLine 6: MODE=PE
+LLine 7: METHODS=ALIGN-HPRC
+LLine 8: SAVE_INTERMEDIATE=1
+LLine 9: THREADS=30
+LLine 12: METRIC=custom
+LLine 13: THRESHOLD=0.175
+LLine 14: MIN_RUN_LENGTH=5
+LLine 17: CONDA_ENV_NAME=human-filtration
+LLine 21: MINIMAP2_HG38_INDEX_PATH=/local/workdir/nc564/human_host_check/human_host_filtration/ref/hg38.mmi
+LLine 22: MINIMAP2_T2T_INDEX_PATH=/local/workdir/nc564/human_host_check/human_host_filtration/ref/t2t.mmi
+LLine 23: MINIMAP2_HPRC_INDEX_PATH=/local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test
+LLine 24: ADAPTERS=/local/workdir/nc564/human_host_check/human_host_filtration/ref/known_adapters.fna
+LLine 25: TMP=/local/workdir/nc564/human_host_check/human_host_filtration/tmp
+LLine 30: '[' -z /local/workdir/nc564/human_host_check/human_host_filtration/tmp ']'
+LLine 36: [[ PE != \P\E ]]
+LLine 42: declare -A file_map
+LLine 43: file_map["ALIGN-HG38"]=/local/workdir/nc564/human_host_check/human_host_filtration/filter_align_hg38.sh
+LLine 44: file_map["ALIGN-T2T"]=/local/workdir/nc564/human_host_check/human_host_filtration/filter_align_t2t.sh
+LLine 45: file_map["ALIGN-HPRC"]=/local/workdir/nc564/human_host_check/human_host_filtration/filter_align_hprc.sh
+LLine 46: file_map["INDEX-HPRC"]=/local/workdir/nc564/human_host_check/human_host_filtration/filter_index_hprc.sh
+Line 15: echo 'Output directory = /local/workdir/nc564/human_host_check/human_host_filtration/data/host-filtered'
+Line 17: f=
+Output directory = /local/workdir/nc564/human_host_check/human_host_filtration/data/host-filtered
+LLine 18: basename '' .fastq
+Line 18: basename=
+LLine 19: basename '' .fastq.gz
+Line 19: basename=
+Line 22: '[' '!' -d /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test ']'
+LLine 22: ls -A /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA18906.maternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA18906.paternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA19240.maternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA19240.paternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA20129.maternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA20129.paternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA21309.maternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA21309.paternal.f1_assembly_v2_genbank.mmi
+Line 22: '[' -z '/local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA18906.maternal.f1_assembly_v2_genbank.mmi
+/local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA18906.paternal.f1_assembly_v2_genbank.mmi
+/local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA19240.maternal.f1_assembly_v2_genbank.mmi
+/local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA19240.paternal.f1_assembly_v2_genbank.mmi
+/local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA20129.maternal.f1_assembly_v2_genbank.mmi
+/local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA20129.paternal.f1_assembly_v2_genbank.mmi
+/local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA21309.maternal.f1_assembly_v2_genbank.mmi
+/local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA21309.paternal.f1_assembly_v2_genbank.mmi' ']'
+Line 28: echo 'Saving temporary files to /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ'
+Line 31: [[ '' == *.gz ]]
+Line 35: echo 'Input file is NOT compressed'
+Saving temporary files to /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ
+Input file is NOT compressed
+Line 36: cp '' /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq
+cp: cannot stat '': No such file or directory
+Line 98: export -f run_minimap2
+Line 99: export TMPDIR basename THREADS OUT
+Line 102: [[ PE == *\P\E* ]]
+Line 103: parallel -j 2 run_minimap2 ::: /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA18906.maternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA18906.paternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA19240.maternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA19240.paternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA20129.maternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA20129.paternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA21309.maternal.f1_assembly_v2_genbank.mmi /local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi/test/NA21309.paternal.f1_assembly_v2_genbank.mmi ::: PE ::: /local/workdir/nc564/human_host_check/human_host_filtration/data/host-filtered
+The input file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz
+The output file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_new_.fastq.gz
+Error: Input file '/local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz' not found.
+The input file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz
+The output file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_new_.fastq.gz
+Error: Input file '/local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz' not found.
+The input file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz
+The output file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_new_.fastq.gz
+Error: Input file '/local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz' not found.
+The input file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz
+The output file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_new_.fastq.gz
+Error: Input file '/local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz' not found.
+The input file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz
+The output file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_new_.fastq.gz
+Error: Input file '/local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz' not found.
+The input file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz
+The output file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_new_.fastq.gz
+Error: Input file '/local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz' not found.
+The input file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz
+The output file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_new_.fastq.gz
+Error: Input file '/local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz' not found.
+The input file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz
+The output file is /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_new_.fastq.gz
+Error: Input file '/local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ/seqs_.fastq.gz' not found.
+Cleaning up /local/workdir/nc564/human_host_check/human_host_filtration/tmp/tmp.z3dF8KakQQ
+other_files.txt
+r1_files.txt
+r2_files.txt
+Pipeline complete

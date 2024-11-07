@@ -1,6 +1,10 @@
 #!/bin/bash
 
-#set -n # WARNING remove before using. This runs code but does not execute for syntax error checks
+#set -x # WARNING remove before using. This runs code but does not execute for syntax error checks
+#export PS4='Line $LINENO: '
+
+# redirect output to log file
+exec > >(tee -i log.out) 2>&1
 
 #######################################
 #
@@ -34,9 +38,9 @@ reset="\033[0m"
 SCRIPT_NAME=$(basename "$0")
 VER="1.0.0"
 home=$(dirname "$0")
-home=$(readlink -m $home)
+home=$(readlink -m "$home")
 
-echo "Home directory set to" $home
+echo "Home directory set to $home"
 
 ########
 # Help #
@@ -163,7 +167,8 @@ cd $home
 ## -z check if find command output is empty
 
 : <<'COMMENT'
-if [ ! -d "$MINIMAP2_HPRC_INDEX_PATH" ] || [ -z "$(ls -A '$MINIMAP2_HPRC_INDEX_PATH'/*.mmi 2>/dev/null)" ]; then
+if [ ! -d "$MINIMAP2_HPRC_INDEX_PATH" ] || [ -z "$(ls -A '$MINIMAP2_HPRC_INDEX_PATH'/*.mmi 2>/dev/null)" ];
+then
     echo "Index directory $MINIMAP2_HPRC_INDEX_PATH does not exist, is not a directory, or does not contain any index files (.mmi). Building minimap2 index [$(date)]" then
 
   # create minimap indexes from reference genomes
