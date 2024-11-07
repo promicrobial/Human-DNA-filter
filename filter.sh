@@ -1,3 +1,13 @@
+#!/bin/bash -l
+# author: Lucas Patel (lpatel@ucsd.edu)
+# date: 12/22/23
+# modified: Nathaniel Cole 10/31/24
+# description: Script to run host DNA detection pipeline on pre-processed FASTQ files.
+
+set -x #used for debugging
+#set -e
+#set -o pipefail
+
 config_fn="$1"
 if ! source "${config_fn}"; then
   echo "Error: Unable to source configuration file: ${config_fn}"
@@ -46,6 +56,8 @@ process_files() {
   else
     base_name=$(strip_extensions "$r1_file")
   fi
+
+  in_file="$1"
 
   # determines and runs the selected pipeline outlines in config.sh
   for key in "${METHODS[@]}"; do
