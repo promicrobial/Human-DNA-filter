@@ -1,6 +1,6 @@
 #!/bin/bash -l
 # author: Lucas Patel (lpatel@ucsd.edu)
-# date: 12/22/23 
+# date: 12/22/23
 # modified: Nathaniel Cole 10/31/24
 # description: Script to run host DNA detection pipeline on pre-processed FASTQ files.
 
