@@ -55,10 +55,8 @@ run_minimap2() {
     #local output_file="${TMPDIR}/seqs_new_${basename}.fastq"
   #fi
 
-  echo "The input file is $input_file"
-  echo "The output file is $output_file"
-
   # FIXME conditional to work with =- .gz files
+
   if [[ "$mode" == "PE" ]]; then
     if [[ -f "$input_file" ]]; then
       echo "Running minimap2 (PE) on ${mmi} and ${input_file}"
@@ -68,24 +66,26 @@ run_minimap2() {
       echo "Error: Input file '${input_file}' not found."
       exit 1
     fi
-    elif [[ "$mode" == "SE" ]]; then
-      if [[ -f "$input_file" ]]; then
-        echo "Running minimap2 (SE) on ${mmi} and ${input_file}"
-        minimap2 -ax sr -t "${THREADS}" "${mmi}" "${input_file}" | \
-        samtools fastq -@ "${THREADS}" -f 4 -F 256 > "$output_file"
-      else
-        echo "Error: Input file '${input_file}' not found."
-        exit 1
-      fi
+  elif [[ "$mode" == "SE" ]]; then
+    if [[ -f "$input_file" ]]; then
+      echo "Running minimap2 (SE) on ${mmi} and ${input_file}"
+      minimap2 -ax sr -t "${THREADS}" "${mmi}" "${input_file}" | \
+      samtools fastq -@ "${THREADS}" -f 4 -F 256 > "$output_file"
     else
-      echo "Error: Invalid mode '${mode}'."
+      echo "Error: Input file '${input_file}' not found."
       exit 1
     fi
+  else
+    echo "Error: Invalid mode '${mode}'."
+    exit 1
+  fi
 
-    # Move the output file to the specified directory
-  #if [[ -v "$out" ]] && [[ -e "$output_file" ]]; then
+  # Move the output file to the specified directory
+  if [[ -e "$output_file" ]]; then
     mkdir -p $out
     mv "${output_file}" "${out}/$(basename "$output_file")"
+  else echo "Error: Output file '${output_file}' does not exist."
+  fi
   #elif [[ ! -v "$out" ]]; then
   #    echo "Error: Output directory not assigned to variable 'out'."
   #    exit 1
@@ -100,11 +100,11 @@ export TMPDIR basename THREADS OUT
 
 # Run minimap2 and samtools in parallel
 if [[ "${MODE}" == *"PE"* ]]; then
-  parallel -j 2 run_minimap2 ::: "${MINIMAP2_HPRC_INDEX_PATH}"/*.mmi ::: PE ::: $OUT
+  parallel -j 2 run_minimap2 ::: "${MINIMAP2_HPRC_INDEX_PATH}"/*.mmi ::: "PE" ::: "$OUT"
 fi
 
 #if [[ "${MODE}" == *"SE"* ]]; then
-#  parallel -j 2 run_minimap2 ::: "${MINIMAP2_HPRC_INDEX_PATH}"/*.mmi ::: SE ::: $OUT
+#  parallel -j 2 run_minimap2 ::: "${MINIMAP2_HPRC_INDEX_PATH}"/*.mmi ::: "SE" ::: "$OUT"
 #fi
 
 #if [[ "${MODE}" == "PE+SE" ]]; then

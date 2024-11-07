@@ -13,10 +13,11 @@ if ! source "${config_fn}"; then
   echo "Error: Unable to source configuration file: ${config_fn}"
   exit 1
 fi
+
 echo "Beginning host filtration on directory: ${IN}"
 
 # make new temp directory
-export TMPDIR="${TMP}/$(basename "$(mktemp -d)")"
+export TMPDIR="${TMP}"
 mkdir -p "${TMPDIR}"
 echo "${TMPDIR}"
 
@@ -26,6 +27,7 @@ find "$IN" -maxdepth 1 -type f \( -name '*_R1*.fastq' -o -name '*_R1*.fastq.gz' 
 find "$IN" -maxdepth 1 -type f \( -name '*_R2*.fastq' -o -name '*_R2*.fastq.gz' \) -exec sh -c 'for f; do echo "$f"; done >> "$TMPDIR/r2_files.txt"' sh {} +
 
 find "$IN" -maxdepth 1 -type f \( -name '*.fastq' -o -name '*.fastq.gz' \) | grep -vE '_R[12]' > "$TMPDIR/other_files.txt"
+
 echo "fastq files found!"
 
 echo "Found $(wc -l < "$TMPDIR/r1_files.txt") R1 FASTQ files" && echo "Found $(wc -l < "$TMPDIR/r2_files.txt") R2 FASTQ files" && [ $(wc -l < "$TMPDIR/r1_files.txt") -eq $(wc -l < "$TMPDIR/r2_files.txt") ] || echo "Warning: The number of R1 and R2 FASTQ files is not the same."
