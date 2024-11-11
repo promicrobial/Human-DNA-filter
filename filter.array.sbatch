@@ -5,14 +5,14 @@
 
 #SBATCH -J host_filter
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=lpatel@ucsd.edu
-#SBATCH --time=24:00:00
-#SBATCH --partition=short
-#SBATCH --ntasks=16
+#SBATCH --mail-user=nc564@cornell.edu
+#SBATCH --time=96:00:00
+#SBATCH --ntasks=120
 #SBATCH --nodes=1
-#SBATCH --mem=100gb
+#SBATCH --mem=225000
 #SBATCH --output=logs/%x-%A_%a.out
 #SBATCH --error=logs/%x-%A_%a.err
+#SBATCH --chdir=/local/workdir
 
 ### !!!#SBATCH --exclusive
 

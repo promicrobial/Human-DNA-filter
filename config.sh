@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # configure experiment parameters
-IN="/local/storage/nc564/raw_seq_QC/depleted_trimmed_files_mumbai_ID14768"
+#IN="/local/storage/nc564/raw_seq_QC/depleted_trimmed_files_mumbai_ID14768"
+IN="data"
 OUT="data/host-filtered"
 MODE="PE" # "SE" (single-end) or "PE" (paired-end) or "PE+SE" (paired-end then single-end)
 METHODS=("ALIGN-HG38" "ALIGN-T2T" "INDEX-HPRC") # any combination of "ALIGN-HG38", "ALIGN-T2T", "ALIGN-HPRC", or "INDEX-HPRC"
@@ -40,11 +41,11 @@ fi
 
 # define filtration map
 declare -A file_map
-#file_map["FASTP"]="filter_fastp.sh"
+file_map["FASTP"]="filter_fastp.sh"
 file_map["ALIGN-HG38"]="filter_align_hg38.sh"
 file_map["ALIGN-T2T"]="filter_align_t2t.sh"
 file_map["ALIGN-HPRC"]="filter_align_hprc.sh"
 file_map["INDEX-HPRC"]="filter_index_hprc.sh"
 
-source /local/workdir/$USER/miniconda3/bin/activate
+source ~/.bashrc
 conda activate $CONDA_ENV_NAME
