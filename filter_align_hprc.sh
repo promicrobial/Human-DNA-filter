@@ -3,8 +3,9 @@
 # date: 1/23/2024
 # description: Script to run HPRC alignment on single interleaved FASTQ file.
 
-set -e 
-set -o pipefail
+set -x
+#set -e
+#set -o pipefail
 
 config_fn=$2
 source $config_fn

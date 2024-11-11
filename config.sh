@@ -5,7 +5,7 @@
 IN="data"
 OUT="data/host-filtered"
 MODE="PE" # "SE" (single-end) or "PE" (paired-end) or "PE+SE" (paired-end then single-end)
-METHODS=("ALIGN-HG38" "ALIGN-T2T" "INDEX-HPRC") # any combination of "ALIGN-HG38", "ALIGN-T2T", "ALIGN-HPRC", or "INDEX-HPRC"
+METHODS=("ALIGN-HG38" "ALIGN-T2T" "ALIGN-HPRC") # any combination of "ALIGN-HG38", "ALIGN-T2T", "ALIGN-HPRC", or "INDEX-HPRC"
 SAVE_INTERMEDIATE=1 # 0 for TRUE and 1 for FALSE
 THREADS=7
 
@@ -23,7 +23,7 @@ MINIMAP2_HG38_INDEX_PATH="/local/workdir/nc564/human_host_check/human_host_filtr
 MINIMAP2_T2T_INDEX_PATH="/local/workdir/nc564/human_host_check/human_host_filtration/ref/human-GCA-phix-db.mmi" # one index
 MINIMAP2_HPRC_INDEX_PATH="/local/workdir/nc564/human_host_check/human_host_filtration/ref/mmi" # directory of indexes
 ADAPTERS="/local/workdir/nc564/human_host_check/human_host_filtration/ref/known_adapters.fna"
-TMP="tmp" # path to temporary directory for writing
+TMP="/local/workdir/nc564/human_host_check/human_host_filtration" # path to temporary directory for writing
 
 # END CONFIGURATION
 

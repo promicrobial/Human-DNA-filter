@@ -16,6 +16,8 @@
 
 ### !!!#SBATCH --exclusive
 
+set -x
+
 source ${config_fn}
 echo "Beginning host filtration (job array mode) on directory: ${IN}"
 
@@ -62,8 +64,7 @@ process_files() {
       mkdir -p "${OUT}/${key,,}"
       mv "${TMPDIR}/$(basename "$base_name").${key}.fastq" "${OUT}/${key,,}/$(basename "$base_name").${key}.fastq"
       in_file="${OUT}/${key,,}/$(basename "$base_name").${key}.fastq"
-    else
-      in_file="${TMPDIR}/$(basename "$base_name").${key}.fastq"
+    else      in_file="${TMPDIR}/$(basename "$base_name").${key}.fastq"
     fi
   done
 

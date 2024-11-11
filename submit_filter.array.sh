@@ -1,7 +1,10 @@
 #!/bin/bash -l
 # author: Lucas Patel (lpatel@ucsd.edu)
-# date: 12/22/23 
-# description: Script to run 
+# date: 12/22/23
+# modified: Nathaniel Cole 11/11/2024
+# description: Script to run
+
+set -x
 
 config_fn=$1
 source ${config_fn}
@@ -9,8 +12,8 @@ export config_fn="${config_fn}"
 
 echo "Beginning host filtration (job array mode) on directory: ${IN}"
 
-export TMPDIR="${TMP}"
-mkdir -p ${TMPDIR}
+export TMPDIR="$(basename $(mktemp -d))"
+mkdir ${TMPDIR}
 echo $TMPDIR
 
 find "$IN" -maxdepth 1 -type f \( -name '*_R1*.fastq' -o -name '*_R1*.fastq.gz' \) -exec sh -c 'for f; do echo "$f"; done >> "$TMPDIR/r1_files.txt"' sh {} +

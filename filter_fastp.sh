@@ -1,10 +1,10 @@
 #!/bin/bash -l
 # author: Lucas Patel (lpatel@ucsd.edu)
-# date: 12/22/23 
+# date: 12/22/23
 # description: Script to run fastp on R1/R2 or interleaved FASTQ inputs as part of a full host filtration pipeline.
-
-set -e 
-set -o pipefail
+set -x
+#set -e
+#set -o pipefail
 
 config_fn=$3
 source $config_fn
@@ -28,8 +28,8 @@ process_fastp() {
   fi
 
   mkdir -p ${OUT}/fastp
-  echo "fastp ${fastp_options} > ${OUT}/fastp/$(basename "$base_name").FASTP.fastq"
-  fastp ${fastp_options} > "${OUT}/fastp/$(basename "$base_name").FASTP.fastq"
+  echo "fastp ${fastp_options} > ${OUT}/fastp/$(basename "$base_name")_FASTP.fastq"
+  fastp ${fastp_options} > "${OUT}/fastp/$(basename "$base_name")_FASTP.fastq"
 }
 
 process_fastp "$1" "$2"
