@@ -60,6 +60,7 @@ process_files() {
   fi
 
   in_file="$1"
+  echo "Submitting $in_file"
 
   # determines and runs the selected pipeline outlines in config.sh
   for key in "${METHODS[@]}"; do
@@ -69,7 +70,7 @@ process_files() {
       bash "$script" "$in_file" "$config_fn"
     else
       echo "Key $key not valid or file-path $script not found."
-      continue
+      exit 1
     fi
 
     #if [ "$SAVE_INTERMEDIATE" -eq 0 ]; then

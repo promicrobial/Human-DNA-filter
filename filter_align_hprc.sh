@@ -10,7 +10,10 @@ export PS4='Line $LINENO: '
 #set -o pipefail
 
 config_fn=$2
-source $config_fn
+if ! source "$config_fn"; then
+  echo "Error: Unable to source configuration file: ${config_fn}"
+  exit 1
+fi
 
 echo "Output directory = $OUT"
 
@@ -70,7 +73,7 @@ run_minimap2() {
     if [[ -f "$input_file" ]]; then
       echo "Running minimap2 (SE) on ${mmi} and ${input_file}"
       minimap2 -ax sr -t "${THREADS}" "${mmi}" "${input_file}" | \
-      samtools fastq -@ "${THREADS}" -f 4 -F 256 > "$output_file"
+      samtools fastq -@ "${THREADS}" -f 4 -F 256 > "$output_file" #reverses unmapped sequences from SAM file back into FASTQ format
     else
       echo "Error: Input file '${input_file}' not found."
       exit 1
@@ -83,7 +86,7 @@ run_minimap2() {
   # Move the output file to the specified directory
   if [[ -e "$output_file" ]]; then
     mkdir -p $out
-    mv "${output_file}" "${out}/$(basename "$output_file")"
+    cp "${output_file}" "${out}/$(basename "$output_file")"
   else echo "Error: Output file '${output_file}' does not exist."
   fi
   #elif [[ ! -v "$out" ]]; then

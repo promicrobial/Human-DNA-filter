@@ -20,7 +20,7 @@ CONDA_ENV_NAME="human-filtration"
 #MINIMAP2_PATH="$(which minimap2)" # path to minimap2 executable
 MINIMAP2_HG38_INDEX_PATH="$home/ref/hg38.mmi" # one index
 MINIMAP2_T2T_INDEX_PATH="$home/ref/t2t.mmi" # one index
-MINIMAP2_HPRC_INDEX_PATH="$home/ref/mmi/test" # directory of indexes
+MINIMAP2_HPRC_INDEX_PATH="$home/ref/mmi" # directory of indexes
 ADAPTERS="$home/ref/known_adapters.fna"
 TMP="$home/tmp" # path to temporary directory for writing
 
