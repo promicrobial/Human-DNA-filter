@@ -9,7 +9,7 @@ export config_fn="${config_fn}"
 
 echo "Beginning host filtration (job array mode) on directory: ${IN}"
 
-export TMPDIR="${TMP}/$(basename $(mktemp -d))"
+export TMPDIR="${TMP}"
 mkdir -p ${TMPDIR}
 echo $TMPDIR
 
