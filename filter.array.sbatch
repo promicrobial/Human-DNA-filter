@@ -1,18 +1,18 @@
 #!/bin/bash -l
 # author: Lucas Patel (lpatel@ucsd.edu)
-# date: 12/22/23 
+# date: 12/22/23
 # description: Script to run fastp on arbitrary inputs as part of a full host filtration pipeline. The adapters used are based on manual curation.
 
 #SBATCH -J host_filter
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=nc564@cornell.edu
 #SBATCH --time=96:00:00
-#SBATCH --ntasks=120
+#SBATCH --ntasks=12
 #SBATCH --nodes=1
-#SBATCH --mem=225000
-#SBATCH --output=logs/%x-%A_%a.out
-#SBATCH --error=logs/%x-%A_%a.err
-#SBATCH --chdir=/local/workdir
+#SBATCH --mem=22500
+#SBATCH --output=%x-%A_%a.out
+#SBATCH --error=%x-%A_%a.err
+#SBATCH --chdir=/local/workdir/nc564/human_host_check/original_filtration_pipeline/human_host_filtration
 
 ### !!!#SBATCH --exclusive
 
@@ -67,7 +67,7 @@ process_files() {
     fi
   done
 
-  if [[ -n "$r2_file" ]]; then
+  if [[ ! -s "$r2_file" ]]; then #modified logic
     echo "Splitting into R1/R2..."
     bash split_fastq.sh "$in_file" "$config_fn"
   fi
