@@ -3,12 +3,6 @@
 # date: $(date +%Y-%m-%d)
 # description: Generate directory-wise summary statistics for .fastq and .fastq.gz files
 
-# Check for the correct number of arguments
-#if [ "$#" -ne 4 ]; then
-#  echo "Usage: $0 <directory> <identifier> <X> <Y>"
-#  exit 1
-#fi
-
 directory=$1
 identifier=$2
 X=$3
@@ -35,13 +29,13 @@ calculate_counts() {
   fi
 }
 
-# Loop over all .fastq and .fastq.gz files in the directory
-for file in "${directory}"/*.{fastq,fastq.gz}; do
+# Find all .fastq and .fastq.gz files in the directory and subdirectories
+find "$directory" -type f \( -name "*.fastq" -o -name "*.fastq.gz" \) | while read -r file; do
   if [[ -f "$file" ]]; then
     line_count=$(calculate_counts "$file" "")
     human_count=$(calculate_counts "$file" "HUMAN")
     microbe_count=$(calculate_counts "$file" "MICROBE")
-    
+
     if [ "$compute_confusion_matrix" = true ]; then
       TP=$((X - human_count))
       FP=$((Y - microbe_count))
@@ -53,5 +47,4 @@ for file in "${directory}"/*.{fastq,fastq.gz}; do
     fi
   fi
 done
-
 

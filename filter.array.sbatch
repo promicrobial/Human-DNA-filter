@@ -9,7 +9,7 @@
 #SBATCH --time=96:00:00
 #SBATCH --ntasks=12
 #SBATCH --nodes=1
-#SBATCH --mem=22500
+#SBATCH --mem=225000
 #SBATCH --output=%x-%A_%a.out
 #SBATCH --error=%x-%A_%a.err
 #SBATCH --chdir=/local/workdir/nc564/human_host_check/original_filtration_pipeline/human_host_filtration
@@ -48,7 +48,7 @@ process_files() {
 
   echo "Running FASTP..."
   bash "${file_map['FASTP']}" "$r1_file" "$r2_file" "$config_fn"
-  local in_file="${OUT}/fastp/$(basename "$base_name").FASTP.fastq"
+  local in_file="${OUT}/fastp/$(basename "$base_name")_FASTP.fastq" #.fastp to _fastp to match filter_fastp.sh script file naming
 
   for key in "${METHODS[@]}"; do
     local script="${file_map[$key]}"

@@ -5,9 +5,9 @@
 IN="data"
 OUT="data/host-filtered"
 MODE="PE" # "SE" (single-end) or "PE" (paired-end) or "PE+SE" (paired-end then single-end)
-METHODS=("ALIGN-HG38" "ALIGN-T2T" "ALIGN-HPRC") # any combination of "ALIGN-HG38", "ALIGN-T2T", "ALIGN-HPRC", or "INDEX-HPRC"
+METHODS="ALIGN-HPRC" # any combination of "ALIGN-HG38", "ALIGN-T2T", "ALIGN-HPRC", or "INDEX-HPRC"
 SAVE_INTERMEDIATE=1 # 0 for TRUE and 1 for FALSE
-THREADS=7
+THREADS=25
 
 # configure index filtration parameters
 METRIC="custom" # "max", "average", or "custom"
