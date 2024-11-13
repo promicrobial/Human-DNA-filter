@@ -27,7 +27,9 @@ if [[ "${MODE}" == *"PE"* ]]; then
   do
     echo "Running minimap2 (PE) on ${mmi}"
     minimap2 -2 -ax sr -t "${THREADS}" "${mmi}" "${TMPDIR}"/seqs_${new_basename}.fastq | \
-      samtools fastq -@ "${THREADS}" -f 12 -F 256 > "${TMPDIR}"/seqs_new_${new_basename}.fastq
+      samtools fastq -@ "${THREADS}" -f 12 -F 256 > "${TMPDIR}"/seqs_new_${new_basename}.fastq # non-human/unmapped reads
+# The flag value 12 is a bitwise combination of 0x4 (unmapped read) and 0x8 (unmapped mate)
+# -F 256 excludes secondary alignments from the output
     mv "${TMPDIR}"/seqs_new_${new_basename}.fastq "${TMPDIR}"/seqs_${new_basename}.fastq
   done
 fi
