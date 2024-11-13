@@ -1,0 +1,6 @@
+file	key	line count	human count	microbe count	TP	FP	TN	FN
+/local/workdir/nc564/human_host_check/original_filtration_pipeline/human_host_filtration/data/50.00p-HG002.maternal_50.00p-FDA-ARGO-41_sim_SUB-h100000-m100000_R1.fastq	ALIGN.HPRC	400000	50000	50000	50000	50000	50000	50000
+/local/workdir/nc564/human_host_check/original_filtration_pipeline/human_host_filtration/data/50.00p-HG002.maternal_50.00p-FDA-ARGO-41_sim_SUB-h100000-m100000_R2.fastq	ALIGN.HPRC	400000	50000	50000	50000	50000	50000	50000
+/local/workdir/nc564/human_host_check/original_filtration_pipeline/human_host_filtration/tmp.KuLaZ3hOZL/seqs_50.00p-HG002.maternal_50_R1.fastq	ALIGN.HPRC	400000	50000	50000	50000	50000	50000	50000
+/local/workdir/nc564/human_host_check/original_filtration_pipeline/human_host_filtration/tmp.KuLaZ3hOZL/seqs_50.00p-HG002.maternal_50_R2.fastq	ALIGN.HPRC	400000	50000	50000	50000	50000	50000	50000
+/local/workdir/nc564/human_host_check/original_filtration_pipeline/human_host_filtration/tmp.KuLaZ3hOZL/50.00p-HG002.maternal_50.ALIGN-HPRC.fastq	ALIGN.HPRC	400152	50	99988	99950	12	99988	50

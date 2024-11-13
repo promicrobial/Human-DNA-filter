@@ -29,7 +29,7 @@ process_fastp() {
 
   mkdir -p ${OUT}/fastp
   echo "fastp ${fastp_options} > ${OUT}/fastp/$(basename "$base_name")_FASTP.fastq"
-  fastp ${fastp_options} > "${OUT}/fastp/$(basename "$base_name")_FASTP.fastq"
+  fastp ${fastp_options} > "${OUT}/fastp/$(basename "$base_name")_FASTP.fastq" #results in an interleaved fastq file
 }
 
 process_fastp "$1" "$2"

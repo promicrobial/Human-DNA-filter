@@ -1,0 +1,1 @@
+data/50.00p-HG002.maternal_50.00p-FDA-ARGO-41_sim_SUB-h100000-m100000_R1.fastq

@@ -5,9 +5,9 @@ import gzip
 class TestPipelineOutput(unittest.TestCase):
     def setUp(self):
         """Setup the base directory and file names."""
-        self.base_directory = "data/host-filtered/"
-        self.file_names = ["50.00p-HG002.maternal_50.00p-FDA-ARGO-41_sim_SUB-h100000-m100000_R1.fastq.gz", 
-                           "50.00p-HG002.maternal_50.00p-FDA-ARGO-41_sim_SUB-h100000-m100000_R2.fastq.gz"]
+        self.base_directory = "data/"
+        self.file_names = ["50.00p-HG002.maternal_50.00p-FDA-ARGO-41_sim_SUB-h100000-m100000_R1.fastq", 
+                           "50.00p-HG002.maternal_50.00p-FDA-ARGO-41_sim_SUB-h100000-m100000_R2.fastq"]
 
     def test_files_read_count(self):
         """Test each gzipped file for the correct number of reads."""

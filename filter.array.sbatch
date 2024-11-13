@@ -2,6 +2,8 @@
 # author: Lucas Patel (lpatel@ucsd.edu)
 # date: 12/22/23
 # description: Script to run fastp on arbitrary inputs as part of a full host filtration pipeline. The adapters used are based on manual curation.
+# parent: submit_filter_array.sh
+# modified: Nathaniel Cole 11/11/2024
 
 #SBATCH -J host_filter
 #SBATCH --mail-type=ALL
@@ -46,9 +48,12 @@ process_files() {
     base_name=$(strip_extensions "$r1_file")
   fi
 
-  echo "Running FASTP..."
-  bash "${file_map['FASTP']}" "$r1_file" "$r2_file" "$config_fn"
-  local in_file="${OUT}/fastp/$(basename "$base_name")_FASTP.fastq" #.fastp to _fastp to match filter_fastp.sh script file naming
+#  echo "Running FASTP..."
+#  bash "${file_map['FASTP']}" "$r1_file" "$r2_file" "$config_fn"
+# output is an interleaved files hence the logic of the split fastq function below
+#  local in_file="${OUT}/fastp/$(basename "$base_name")_FASTP.fastq" #.fastp to _fastp to match filter_fastp.sh script file naming
+
+  local in_file="$r1_file"
 
   for key in "${METHODS[@]}"; do
     local script="${file_map[$key]}"
@@ -69,6 +74,7 @@ process_files() {
   done
 
   if [[ ! -s "$r2_file" ]]; then #modified logic
+#  if [[ -n "$r2_file" ]]; then
     echo "Splitting into R1/R2..."
     bash split_fastq.sh "$in_file" "$config_fn"
   fi
