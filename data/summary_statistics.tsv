@@ -1,0 +1,6 @@
+file	key	line count	human count	microbe count	TP	FP	TN	FN
+/local/workdir/nc564/human_host_check/human_host_filtration/data/50.00p-HG002.maternal_50.00p-FDA-ARGO-41_sim_SUB-h100000-m100000_R1.fastq.gz	ALIGN.HPRC	400000	50000	50000	50000	50000	50000	50000
+
+/local/workdir/nc564/human_host_check/human_host_filtration/data/50.00p-HG002.maternal_50.00p-FDA-ARGO-41_sim_SUB-h100000-m100000_R2.fastq.gz	ALIGN.HPRC	400000	50000	50000	50000	50000	50000	50000
+
+/local/workdir/nc564/human_host_check/human_host_filtration/data/host-filtered/seqs_new_50.00p-HG002.maternal_50.00p-FDA-ARGO-41_sim_SUB-h100000-m100000_R1.fastq.gz	ALIGN.HPRC	0	0	0	100000	100000	0	0
